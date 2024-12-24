@@ -1,6 +1,6 @@
 {
     "name": "fedir/php-graphql-projection",
-    "description": "GraphQL projections generator for laravel",
+    "description": "GraphQL projections generator for Laravel",
     "license": "MIT",
     "keywords": [
         "graphql",
@@ -21,7 +21,8 @@
     "version": "0.1.0",
     "require": {
         "php": "^8.2",
-        "illuminate/support": "^10.0|^11.0"
+        "illuminate/support": "^10.0|^11.0",
+        "webonyx/graphql-php": "^15"
     },
     "suggest": {
         "nuwave/lighthouse": "Required for generating graphql projections for Lighthouse",
@@ -45,7 +46,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Wezom\\Testing\\TestingServiceProvider"
+                "Fedir\\GraphQLProjection\\GraphQLProjectionServiceProvider"
             ]
         }
     }

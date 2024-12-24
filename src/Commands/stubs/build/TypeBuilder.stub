@@ -1,0 +1,29 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DummyNamespace;
+
+class {{ class }}
+{
+    private array $fieldsSetFor{{ targetClass }} = [];
+{{ fields }}
+
+    public static function newBuilder(): self
+    {
+        return new self();
+    }
+
+{{ builderMethods }}
+
+    public function build(): {{ targetClass }}
+    {
+        $class = new {{ targetClass }}();
+
+        foreach ($this->fieldsSetFor{{ targetClass }} as $prop) {
+            $class->{'set' . ucfirst($prop)}($this->$prop);
+        }
+
+        return $class;
+    }
+}

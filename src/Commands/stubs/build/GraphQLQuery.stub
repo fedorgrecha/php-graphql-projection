@@ -1,0 +1,20 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DummyNamespace;
+
+use Fedir\GraphQLProjection\Client\GraphQLQuery;
+
+class DummyClass extends GraphQLQuery
+{
+    public function getOperationName(): string
+    {
+        return '{{ operationName }}';
+    }
+
+    public static function newRequest(): {{ class }}Builder
+    {
+        return new {{ class }}Builder();
+    }
+}
