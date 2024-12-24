@@ -1,0 +1,52 @@
+{
+    "name": "fedir/php-graphql-projection",
+    "description": "GraphQL projections generator for laravel",
+    "license": "MIT",
+    "keywords": [
+        "graphql",
+        "projection",
+        "lighthouse",
+        "rebing",
+        "laravel",
+        "laravel-graphql"
+    ],
+    "authors": [
+        {
+            "name": "Fedir Hrechanyi",
+            "email": "fedorgrechaniy@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "type": "library",
+    "version": "0.1.0",
+    "require": {
+        "php": "^8.2",
+        "illuminate/support": "^10.0|^11.0"
+    },
+    "suggest": {
+        "nuwave/lighthouse": "Required for generating graphql projections for Lighthouse",
+        "rebing/graphql-laravel": "Required for generating graphql projections for Rebing"
+    },
+    "autoload": {
+        "psr-4": {
+            "Fedir\\GraphQLProjection\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Fedir\\GraphQLProjection\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Wezom\\Testing\\TestingServiceProvider"
+            ]
+        }
+    }
+}
