@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fedir\GraphQLProjection\Commands\GeneratorWrapper;
+namespace GraphQLProjection\Commands\GeneratorWrapper;
 
 use GraphQL\Type\Definition\NamedType;
 use GraphQL\Type\Definition\ScalarType;

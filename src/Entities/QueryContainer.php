@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fedir\GraphQLProjection\Entities;
+namespace GraphQLProjection\Entities;
 
 use ErrorException;
 use GraphQL\Type\Definition\FieldDefinition;

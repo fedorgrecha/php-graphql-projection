@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fedir\GraphQLProjection\Configs;
+namespace GraphQLProjection\Configs;
 
 enum IdPhpTypeEnum: string
 {

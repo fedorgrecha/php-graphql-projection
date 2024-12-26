@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Fedir\GraphQLProjection\Configs\IdPhpTypeEnum;
-use Fedir\GraphQLProjection\LighthouseSchemaProvider;
+use GraphQLProjection\Configs\IdPhpTypeEnum;
+use GraphQLProjection\LighthouseSchemaProvider;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Carbon;
 
@@ -22,12 +22,12 @@ return [
          *
          * Get by base_path()
          */
-        'buildDir' => 'build',
+        'buildDir' => 'build/graphql-projection/',
 
         /*
          * Root Namespace for built classes
          *
-         * Do not forget to add this namespace to composer.json in autoload-dev psr-4 section:
+         * Don't forget to add this namespace to composer.json in autoload-dev psr-4 section:
          * "autoload-dev": {
          *  "psr-4": {
          *    "{namespace}": "{buildDir}/",
@@ -38,12 +38,12 @@ return [
          * "autoload-dev": {
          *  "psr-4": {
          *    ...,
-         *    "Fedir\\GraphQLProjection\\Build\\": "build/",
+         *    "Build\\GraphQLProjection\\": "build/graphql-projection/",
          *    ...,
          *  }
          * }
          */
-        'namespace' => 'Fedir\\GraphQLProjection\\Build\\',
+        'namespace' => 'Build\\GraphQLProjection\\',
     ],
     'typeMapping' => [
         'ID' => IdPhpTypeEnum::INT,

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Fedir\GraphQLProjection\Commands\GeneratorWrapper;
+namespace GraphQLProjection\Commands\GeneratorWrapper;
 
-use Fedir\GraphQLProjection\Entities\QueryContainer;
+use GraphQLProjection\Entities\QueryContainer;
 use GraphQL\Type\Definition\NamedType;
 use GraphQL\Type\Definition\Type;
 

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Fedir\GraphQLProjection;
+namespace GraphQLProjection;
 
-use Fedir\GraphQLProjection\Commands\GenerateGraphQLProjectionCommand;
+use GraphQLProjection\Commands\GenerateGraphQLProjectionCommand;
 use Illuminate\Foundation\Console\AboutCommand;
 use Illuminate\Support\ServiceProvider;
 

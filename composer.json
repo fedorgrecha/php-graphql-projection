@@ -30,12 +30,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Fedir\\GraphQLProjection\\": "src/"
+            "GraphQLProjection\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Fedir\\GraphQLProjection\\Tests\\": "tests/"
+            "GraphQLProjection\\Tests\\": "tests/"
         }
     },
     "minimum-stability": "dev",
@@ -46,7 +46,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Fedir\\GraphQLProjection\\GraphQLProjectionServiceProvider"
+                "GraphQLProjection\\GraphQLProjectionServiceProvider"
             ]
         }
     }

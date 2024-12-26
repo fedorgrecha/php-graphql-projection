@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Fedir\GraphQLProjection\Commands\GeneratorWrapper\TypeResolvers;
+namespace GraphQLProjection\Commands\GeneratorWrapper\TypeResolvers;
 
-use Fedir\GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypesContext;
-use Fedir\GraphQLProjection\Configs\IdPhpTypeEnum;
-use Fedir\GraphQLProjection\Exceptions\UnmappedTypeException;
+use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypesContext;
+use GraphQLProjection\Configs\IdPhpTypeEnum;
+use GraphQLProjection\Exceptions\UnmappedTypeException;
 use GraphQL\Type\Definition\Argument;
 use GraphQL\Type\Definition\FieldDefinition;
 use GraphQL\Type\Definition\InputObjectField;

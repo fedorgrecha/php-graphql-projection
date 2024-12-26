@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fedir\GraphQLProjection\Client;
+namespace GraphQLProjection\Client;
 
 abstract class GraphQLQuery
 {

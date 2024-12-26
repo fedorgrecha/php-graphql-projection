@@ -17,7 +17,7 @@ Add namespace to the build folder in your composer.json file:
 {
     "autoload-dev": {
         "psr-4": {
-            "Fedir\\GraphQLProjection\\Build\\": "build/"
+            "Build\\GraphQLProjection\\": "build/graphql-projection/"
         }
     }
 }
@@ -51,8 +51,8 @@ artisan graphql:projection
 After all, you can use generated files in your tests:
 ```php
 
-use Fedir\GraphQLProjection\Build\Types\User;
-use Fedir\GraphQLProjection\Build\Types\UserBuilder;
+use Build\GraphQLProjection\Types\User;
+use Build\GraphQLProjection\Types\UserBuilder;
 
 it('build UserType by UserBuilder', function () {
     $userType = UserBuilder::newBuilder()->id(1)->build();

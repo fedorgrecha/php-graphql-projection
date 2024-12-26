@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Fedir\GraphQLProjection\Commands\GeneratorWrapper\Wrappers;
+namespace GraphQLProjection\Commands\GeneratorWrapper\Wrappers;
 
-use Fedir\GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypesContext;
-use Fedir\GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypeWrapper;
+use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypesContext;
+use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypeWrapper;
 use GraphQL\Type\Definition\EnumType;
 use Illuminate\Support\Arr;
 

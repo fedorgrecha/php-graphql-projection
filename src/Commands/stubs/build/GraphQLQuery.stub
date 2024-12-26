@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DummyNamespace;
 
-use Fedir\GraphQLProjection\Client\GraphQLQuery;
+use GraphQLProjection\Client\GraphQLQuery;
 
 class DummyClass extends GraphQLQuery
 {

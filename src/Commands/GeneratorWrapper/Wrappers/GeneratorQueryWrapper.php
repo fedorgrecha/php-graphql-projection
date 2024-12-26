@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Fedir\GraphQLProjection\Commands\GeneratorWrapper\Wrappers;
+namespace GraphQLProjection\Commands\GeneratorWrapper\Wrappers;
 
-use Fedir\GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypesContext;
-use Fedir\GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypeWrapper;
-use Fedir\GraphQLProjection\Commands\GeneratorWrapper\Wrappers\Traits\GeneratorArgsTrait;
-use Fedir\GraphQLProjection\Entities\QueryContainer;
+use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypesContext;
+use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypeWrapper;
+use GraphQLProjection\Commands\GeneratorWrapper\Wrappers\Traits\GeneratorArgsTrait;
+use GraphQLProjection\Entities\QueryContainer;
 
 class GeneratorQueryWrapper implements GeneratorTypeWrapper
 {

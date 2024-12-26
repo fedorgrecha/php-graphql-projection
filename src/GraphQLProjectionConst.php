@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fedir\GraphQLProjection;
+namespace GraphQLProjection;
 
 class GraphQLProjectionConst
 {

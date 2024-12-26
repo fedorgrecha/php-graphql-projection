@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fedir\GraphQLProjection\Commands;
+namespace GraphQLProjection\Commands;
 
 use GraphQL\Type\Schema;
 

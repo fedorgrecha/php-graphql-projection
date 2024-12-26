@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Fedir\GraphQLProjection\Commands\GeneratorWrapper\Wrappers\Traits;
+namespace GraphQLProjection\Commands\GeneratorWrapper\Wrappers\Traits;
 
-use Fedir\GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypesContext;
-use Fedir\GraphQLProjection\Commands\GeneratorWrapper\TypeResolvers\FieldDefinitionTypeResolver;
-use Fedir\GraphQLProjection\Entities\QueryContainer;
+use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypesContext;
+use GraphQLProjection\Commands\GeneratorWrapper\TypeResolvers\FieldDefinitionTypeResolver;
+use GraphQLProjection\Entities\QueryContainer;
 
 /**
  * @property QueryContainer $queryContainer

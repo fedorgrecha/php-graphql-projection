@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Fedir\GraphQLProjection\Commands\GeneratorWrapper\Wrappers;
+namespace GraphQLProjection\Commands\GeneratorWrapper\Wrappers;
 
-use Fedir\GraphQLProjection\Commands\GeneratorWrapper\Wrappers\Traits\GeneratorBuilderMethodTrait;
+use GraphQLProjection\Commands\GeneratorWrapper\Wrappers\Traits\GeneratorBuilderMethodTrait;
 
 class GeneratorObjectTypeBuilderWrapper extends GeneratorObjectTypeWrapper
 {

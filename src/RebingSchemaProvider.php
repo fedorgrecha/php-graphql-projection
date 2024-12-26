@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Fedir\GraphQLProjection;
+namespace GraphQLProjection;
 
-use Fedir\GraphQLProjection\Commands\GraphQLSchemaProvider;
+use GraphQLProjection\Commands\GraphQLSchemaProvider;
 use GraphQL\Type\Schema;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 

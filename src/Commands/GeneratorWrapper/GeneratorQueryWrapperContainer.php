@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Fedir\GraphQLProjection\Commands\GeneratorWrapper;
+namespace GraphQLProjection\Commands\GeneratorWrapper;
 
 use Exception;
-use Fedir\GraphQLProjection\Commands\GeneratorWrapper\Wrappers\GeneratorQueryBuilderWrapper;
-use Fedir\GraphQLProjection\Commands\GeneratorWrapper\Wrappers\GeneratorQueryWrapper;
-use Fedir\GraphQLProjection\Entities\QueryContainer;
+use GraphQLProjection\Commands\GeneratorWrapper\Wrappers\GeneratorQueryBuilderWrapper;
+use GraphQLProjection\Commands\GeneratorWrapper\Wrappers\GeneratorQueryWrapper;
+use GraphQLProjection\Entities\QueryContainer;
 
 readonly class GeneratorQueryWrapperContainer implements GeneratorTypeWrapperContainerInterface
 {

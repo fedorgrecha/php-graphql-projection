@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Fedir\GraphQLProjection\Commands\GeneratorWrapper;
+namespace GraphQLProjection\Commands\GeneratorWrapper;
 
 use Exception;
-use Fedir\GraphQLProjection\Commands\GeneratorWrapper\Wrappers\GeneratorConstantsWrapper;
-use Fedir\GraphQLProjection\Commands\GeneratorWrapper\Wrappers\GeneratorEnumTypeWrapper;
-use Fedir\GraphQLProjection\Commands\GeneratorWrapper\Wrappers\GeneratorInterfaceTypeWrapper;
-use Fedir\GraphQLProjection\Commands\GeneratorWrapper\Wrappers\GeneratorUnionTypeWrapper;
+use GraphQLProjection\Commands\GeneratorWrapper\Wrappers\GeneratorConstantsWrapper;
+use GraphQLProjection\Commands\GeneratorWrapper\Wrappers\GeneratorEnumTypeWrapper;
+use GraphQLProjection\Commands\GeneratorWrapper\Wrappers\GeneratorInterfaceTypeWrapper;
+use GraphQLProjection\Commands\GeneratorWrapper\Wrappers\GeneratorUnionTypeWrapper;
 use GraphQL\Type\Definition\EnumType;
 use GraphQL\Type\Definition\InputObjectType;
 use GraphQL\Type\Definition\InterfaceType;

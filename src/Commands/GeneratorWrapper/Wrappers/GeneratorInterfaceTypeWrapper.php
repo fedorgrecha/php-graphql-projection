@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Fedir\GraphQLProjection\Commands\GeneratorWrapper\Wrappers;
+namespace GraphQLProjection\Commands\GeneratorWrapper\Wrappers;
 
-use Fedir\GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypesContext;
-use Fedir\GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypeWrapper;
-use Fedir\GraphQLProjection\Commands\GeneratorWrapper\TypeResolvers\FieldDefinitionTypeResolver;
-use Fedir\GraphQLProjection\Commands\GeneratorWrapper\Wrappers\Traits\GeneratorMethodTrait;
+use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypesContext;
+use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypeWrapper;
+use GraphQLProjection\Commands\GeneratorWrapper\TypeResolvers\FieldDefinitionTypeResolver;
+use GraphQLProjection\Commands\GeneratorWrapper\Wrappers\Traits\GeneratorMethodTrait;
 use GraphQL\Type\Definition\FieldDefinition;
 use GraphQL\Type\Definition\InterfaceType;
 

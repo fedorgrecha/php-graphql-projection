@@ -1,12 +1,12 @@
 <?php
 
-namespace Fedir\GraphQLProjection\Commands;
+namespace GraphQLProjection\Commands;
 
 use Exception;
-use Fedir\GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypesContext;
-use Fedir\GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypeWrapperContainerInterface;
-use Fedir\GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypeWrapperFactory;
-use Fedir\GraphQLProjection\Entities\QueryContainer;
+use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypesContext;
+use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypeWrapperContainerInterface;
+use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypeWrapperFactory;
+use GraphQLProjection\Entities\QueryContainer;
 use Generator;
 use GraphQL\Type\Definition\NamedType;
 use GraphQL\Type\Definition\Type;
@@ -60,7 +60,7 @@ class GenerateGraphQLProjectionCommand extends GeneratorCommand
         $this->files->deleteDirectory($this->generatorFactory->generatedRootPath());
 
         foreach ($this->generatorFactory->getBuildDirectories() as $directory => $mode) {
-            $this->files->makeDirectory($directory, $mode);
+            $this->files->makeDirectory($directory, $mode, true);
         }
     }
 
