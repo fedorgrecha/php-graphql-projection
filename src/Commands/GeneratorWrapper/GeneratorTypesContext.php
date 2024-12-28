@@ -15,7 +15,9 @@ class GeneratorTypesContext
     /**
      * @param  array<string, Type&NamedType>  $types
      */
-    public function __construct(private readonly array $types) {}
+    public function __construct(private readonly array $types)
+    {
+    }
 
     public function isScalar(string $typeName): bool
     {

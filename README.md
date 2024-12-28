@@ -1,5 +1,7 @@
 ## GraphQL projections generator for Laravel
 
+## Disclaimer: "Still in progress. Wait until release"
+
 ### Installation
 Require this package with composer using the following command:
 ```bash
@@ -60,4 +62,67 @@ it('build UserType by UserBuilder', function () {
     assertInstanceOf(User::class, $userType);
     assertEquals(1, $userType->getId());
 });
+```
+
+### Testing
+
+Imagine you have some GraphQL schema:
+```graphql
+extend type Mutation {
+    userUpdate(id: ID!, input: UserInput!): UserType!
+}
+
+input UserInput {
+    name: String!
+    children: [ChildInput!]!
+}
+
+input ChildInput {
+    name: String!
+    age: Int!
+}
+
+type UserType {
+    id: ID!
+    name: String!
+    children: [ChildType!]!
+    someValue: String
+    someOtherValue(withParam: String): String
+}
+
+type ChildType {
+    name: String!
+    age: Int!
+}
+```
+
+After generating graphql entities (by `artisan graphql:projection` command) you can use it in your tests in this way:
+```php
+$query = UserUpdateGraphQLQuery::newRequest()
+    ->id(1)
+    ->input(
+        $userInput = UserInput::builder()
+            ->name('John Doe')
+            ->children([
+                ChildInput::builder()->name('Child 1')->age(10)->build(),
+                ChildInput::builder()->name('Child 2')->age(20)->build(),
+            ])
+            ->build()
+    )
+    ->build();
+
+$projection = UserUpdateProjection::new()
+    ->id()
+    ->name()
+    ->id()
+        ->children()
+        ->name()
+        ->age()
+    ->getParent() // return to previous type (or ->getRoot() to return to the root)
+    ->someValue();
+    ->someOtherValue('withParam');
+
+$userType = GraphQLQueryExecutor::execute($query, $projection, UserType::class);
+
+$this->assertEquals($userInput->getName(), $userType->getName());
 ```

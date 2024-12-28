@@ -4,26 +4,27 @@ declare(strict_types=1);
 
 namespace GraphQLProjection\Commands\GeneratorWrapper\TypeResolvers;
 
-use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypesContext;
-use GraphQLProjection\Configs\IdPhpTypeEnum;
-use GraphQLProjection\Exceptions\UnmappedTypeException;
 use GraphQL\Type\Definition\Argument;
 use GraphQL\Type\Definition\FieldDefinition;
 use GraphQL\Type\Definition\InputObjectField;
 use GraphQL\Type\Definition\ListOfType;
 use GraphQL\Type\Definition\NamedType;
 use GraphQL\Type\Definition\NonNull;
+use GraphQL\Type\Definition\Type;
+use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypesContext;
+use GraphQLProjection\Configs\IdPhpTypeEnum;
+use GraphQLProjection\Exceptions\UnmappedTypeException;
 
 class FieldDefinitionTypeResolver
 {
     private string $originalType;
-
     private bool $nullable = true;
-
     private bool $list = false;
+    private Type $type;
+    private bool $isScalar;
 
     public function __construct(
-        private readonly FieldDefinition|InputObjectField|Argument $fieldDefinition,
+        public readonly FieldDefinition|InputObjectField|Argument $fieldDefinition,
         private readonly GeneratorTypesContext $typesContext,
     ) {
         $this->resolve();
@@ -49,6 +50,8 @@ class FieldDefinitionTypeResolver
             }
         }
 
+        $this->type = $type;
+
         /** @var NamedType $type */
         $this->originalType = $type->name;
     }
@@ -63,19 +66,43 @@ class FieldDefinitionTypeResolver
         return $this->nullable;
     }
 
-    public function getPhpType(): string
+    public function getType(): Type
     {
-        if ($this->list) {
-            return 'array';
+        return $this->type;
+    }
+
+    /**
+     * Check if type is php scalar type or simple php object like Carbon
+     * Returns false if type is GraphQL type. True otherwise.
+     *
+     * @return bool
+     */
+    public function isScalar(): bool
+    {
+        if (empty($this->isScalar)) {
+            if ($this->getIfScalar() !== null || $this->typesContext->isScalar($this->originalType)) {
+                $this->isScalar = true;
+            } else {
+                $this->isScalar = false;
+            }
         }
 
-        $typeMappings = config('graphql-projection.typeMapping');
+        return $this->isScalar;
+    }
+
+    private function getTypeMappings(): array
+    {
+        return config('graphql-projection.typeMapping');
+    }
+
+    private function getIfScalar(): mixed
+    {
+        $typeMappings = $this->getTypeMappings();
 
         /** @var IdPhpTypeEnum $idType */
         $idType = $typeMappings['ID'];
 
-        //check if simple type
-        $scalarType = match ($this->originalType) {
+        return match ($this->originalType) {
             'ID' => $idType->value,
             'String' => 'string',
             'Int' => 'int',
@@ -83,8 +110,14 @@ class FieldDefinitionTypeResolver
             'Boolean' => 'bool',
             default => null,
         };
+    }
 
-        if (! is_null($scalarType)) {
+    public function getPhpType(): string
+    {
+        $typeMappings = $this->getTypeMappings();
+
+        //check if simple type
+        if (! is_null($scalarType = $this->getIfScalar())) {
             return $scalarType;
         }
 
@@ -92,39 +125,47 @@ class FieldDefinitionTypeResolver
             $scalar = $this->typesContext->getType($this->originalType);
 
             if (! array_key_exists($scalar->name, $typeMappings)) {
-                throw new UnmappedTypeException('Scalar type '.$scalar->name.' could not be mapped to php type');
+                throw new UnmappedTypeException('Scalar type ' . $scalar->name . ' could not be mapped to php type');
             }
 
             $scalarToType = $typeMappings[$scalar->name];
 
             if (str_contains($scalarToType, '\\')) {
-                $scalarToType = '\\'.$scalarToType;
+                $scalarToType = '\\' . $scalarToType;
             }
 
             return $scalarToType;
         }
 
-        return $this->originalType;
+        return $this->wrapOriginalTypeInNamespace();
+    }
+
+    private function wrapOriginalTypeInNamespace(): string
+    {
+        $type = $this->originalType;
+        $namespace = trim(config('graphql-projection.build.namespace'), '\\');
+
+        return '\\' . $namespace . '\\Types\\' . $type;
     }
 
     public function getMethodReturnType(): string
     {
-        $type = $this->list
+        $type = $this->isList()
             ? 'array'
             : $this->getPhpType();
 
-        return $this->nullable
-            ? '?'.$type
+        return $this->isNullable()
+            ? '?' . $type
             : $type;
     }
 
     public function getMethodDocblockType(): string
     {
-        $type = $this->nullable
+        $type = $this->isNullable()
             ? "null|{$this->getPhpType()}"
             : $this->originalType;
 
-        return $this->list
+        return $this->isList()
             ? "array<int, $type>"
             : $type;
     }
@@ -136,12 +177,12 @@ class FieldDefinitionTypeResolver
 
     public function getterName(): string
     {
-        return 'get'.ucfirst($this->getFieldName());
+        return 'get' . ucfirst($this->getFieldName());
     }
 
     public function setterName(): string
     {
-        return 'set'.ucfirst($this->getFieldName());
+        return 'set' . ucfirst($this->getFieldName());
     }
 
     public function builderSetterName(): string

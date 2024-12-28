@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLProjection\Commands\GeneratorWrapper\Wrappers\Traits;
 
-use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypesContext;
-use GraphQLProjection\Commands\GeneratorWrapper\TypeResolvers\FieldDefinitionTypeResolver;
 use GraphQL\Type\Definition\FieldDefinition;
 use GraphQL\Type\Definition\InputObjectField;
 use GraphQL\Type\Definition\NamedType;
 use GraphQL\Type\Definition\Type;
+use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypesContext;
+use GraphQLProjection\Commands\GeneratorWrapper\TypeResolvers\FieldDefinitionTypeResolver;
 use Illuminate\Support\Arr;
 
 /**
@@ -52,7 +52,7 @@ trait GeneratorFieldsTrait
                     $doc .= "    /** @var {$definition->getMethodDocblockType()} */\n";
                 }
 
-                return $doc."    private $type $$name;";
+                return $doc . "    private $type $$name;";
             })),
             $stub
         );

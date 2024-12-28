@@ -13,28 +13,30 @@ class GeneratorQueryBuilderWrapper extends GeneratorQueryWrapper
     public function getClassQualifiedName(): string
     {
         return 'Client/'
-            .ucfirst($this->queryContainer->getName())
-            .'GraphQLQueryBuilder';
+            . ucfirst($this->queryContainer->getName())
+            . 'GraphQLQueryBuilder';
     }
 
     public function getStubPath(): string
     {
-        return __DIR__.'/../../stubs/build/GraphQLQueryBuilder.stub';
+        return __DIR__ . '/../../stubs/build/GraphQLQueryBuilder.stub';
     }
 
     public function getStub(): string
     {
-        $args = $this->getArgs();
         $stub = file_get_contents($this->getStubPath());
+        $stub = $this->replaceFieldSets($stub, $this->getArgs());
 
-        return $this->replaceOperationName($stub);
+        return $this->replaceTargetClass($stub);
     }
 
-    protected function replaceOperationName(string $stub): string
+    protected function replaceTargetClass(string $stub): string
     {
+        $queryName = ucfirst($this->queryContainer->query->name) . 'GraphQLQuery';
+
         return str_replace(
-            '{{ operationName }}',
-            $this->queryContainer->getName(),
+            '{{ targetClass }}',
+            $queryName,
             $stub
         );
     }

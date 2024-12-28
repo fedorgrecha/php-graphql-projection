@@ -2,19 +2,20 @@
 
 declare(strict_types=1);
 
-namespace GraphQLProjection\Commands\GeneratorWrapper;
+namespace GraphQLProjection\Commands\GeneratorWrapper\EntityGenerator;
 
 use Exception;
-use GraphQLProjection\Commands\GeneratorWrapper\Wrappers\GeneratorConstantsWrapper;
-use GraphQLProjection\Commands\GeneratorWrapper\Wrappers\GeneratorEnumTypeWrapper;
-use GraphQLProjection\Commands\GeneratorWrapper\Wrappers\GeneratorInterfaceTypeWrapper;
-use GraphQLProjection\Commands\GeneratorWrapper\Wrappers\GeneratorUnionTypeWrapper;
 use GraphQL\Type\Definition\EnumType;
 use GraphQL\Type\Definition\InputObjectType;
 use GraphQL\Type\Definition\InterfaceType;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\ScalarType;
 use GraphQL\Type\Definition\UnionType;
+use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypeWrapper;
+use GraphQLProjection\Commands\GeneratorWrapper\Wrappers\GeneratorConstantsWrapper;
+use GraphQLProjection\Commands\GeneratorWrapper\Wrappers\GeneratorEnumTypeWrapper;
+use GraphQLProjection\Commands\GeneratorWrapper\Wrappers\GeneratorInterfaceTypeWrapper;
+use GraphQLProjection\Commands\GeneratorWrapper\Wrappers\GeneratorUnionTypeWrapper;
 
 readonly class GeneratorFirstPriorityTypeWrapperContainer extends GeneratorTypeWrapperContainer
 {
@@ -57,6 +58,6 @@ readonly class GeneratorFirstPriorityTypeWrapperContainer extends GeneratorTypeW
             return [];
         }
 
-        throw new Exception('Type not supported: '.class_basename($this->type));
+        throw new Exception('Type not supported: ' . class_basename($this->type));
     }
 }

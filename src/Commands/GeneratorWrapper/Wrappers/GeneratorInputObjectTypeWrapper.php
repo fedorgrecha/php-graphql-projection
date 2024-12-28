@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace GraphQLProjection\Commands\GeneratorWrapper\Wrappers;
 
+use GraphQL\Type\Definition\InputObjectType;
 use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypesContext;
 use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypeWrapper;
 use GraphQLProjection\Commands\GeneratorWrapper\Wrappers\Traits\GeneratorFieldsTrait;
 use GraphQLProjection\Commands\GeneratorWrapper\Wrappers\Traits\GeneratorMethodTrait;
-use GraphQL\Type\Definition\InputObjectType;
 
 class GeneratorInputObjectTypeWrapper implements GeneratorTypeWrapper
 {
@@ -18,16 +18,17 @@ class GeneratorInputObjectTypeWrapper implements GeneratorTypeWrapper
     public function __construct(
         protected GeneratorTypesContext $typesContext,
         protected InputObjectType $type
-    ) {}
+    ) {
+    }
 
     public function getClassQualifiedName(): string
     {
-        return 'Types/'.$this->type->name();
+        return 'Types/' . $this->type->name();
     }
 
     public function getStubPath(): string
     {
-        return __DIR__.'/../../stubs/build/Type.stub';
+        return __DIR__ . '/../../stubs/build/Type.stub';
     }
 
     public function getStub(): string

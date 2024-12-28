@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLProjection\Commands\GeneratorWrapper\Wrappers;
 
+use GraphQL\Type\Definition\InterfaceType;
+use GraphQL\Type\Definition\ObjectType;
 use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypesContext;
 use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypeWrapper;
 use GraphQLProjection\Commands\GeneratorWrapper\Wrappers\Traits\GeneratorFieldsTrait;
 use GraphQLProjection\Commands\GeneratorWrapper\Wrappers\Traits\GeneratorMethodTrait;
-use GraphQL\Type\Definition\InterfaceType;
-use GraphQL\Type\Definition\ObjectType;
 
 class GeneratorObjectTypeWrapper implements GeneratorTypeWrapper
 {
@@ -19,16 +19,17 @@ class GeneratorObjectTypeWrapper implements GeneratorTypeWrapper
     public function __construct(
         protected readonly GeneratorTypesContext $typesContext,
         protected readonly ObjectType $type
-    ) {}
+    ) {
+    }
 
     public function getClassQualifiedName(): string
     {
-        return 'Types/'.$this->type->name();
+        return 'Types/' . $this->type->name();
     }
 
     public function getStubPath(): string
     {
-        return __DIR__.'/../../stubs/build/Type.stub';
+        return __DIR__ . '/../../stubs/build/Type.stub';
     }
 
     public function getStub(): string
@@ -58,7 +59,7 @@ class GeneratorObjectTypeWrapper implements GeneratorTypeWrapper
 
         return str_replace(
             'DummyClass',
-            'DummyClass implements '.implode(
+            'DummyClass implements ' . implode(
                 ', ',
                 array_unique($allInterfaces)
             ),

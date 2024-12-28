@@ -13,6 +13,11 @@ class DummyClass extends GraphQLQuery
         return '{{ operationName }}';
     }
 
+    public function getOperation(): string
+    {
+        return '{{ operation }}';
+    }
+
     public static function newRequest(): {{ class }}Builder
     {
         return new {{ class }}Builder();

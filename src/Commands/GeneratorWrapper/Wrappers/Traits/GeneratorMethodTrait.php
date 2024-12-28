@@ -28,21 +28,21 @@ trait GeneratorMethodTrait
                     $setterDoc .= "    /** @param {$definition->getMethodDocblockType()} $$name */\n";
                 }
 
-                $getter = $getterDoc."    public function {$definition->getterName()}(): $type"
-                    .($withBody ? "\n" : ';');
+                $getter = $getterDoc . "    public function {$definition->getterName()}(): $type"
+                    . ($withBody ? "\n" : ';');
 
                 if ($withBody) {
                     $getter .= "    {\n";
-                    $getter .= '        return $this->'.$name.";\n";
+                    $getter .= '        return $this->' . $name . ";\n";
                     $getter .= "    }\n";
                 }
 
-                $setter = $setterDoc."    public function {$definition->setterName()}($type $$name): void"
-                    .($withBody ? "\n" : ';');
+                $setter = $setterDoc . "    public function {$definition->setterName()}($type $$name): void"
+                    . ($withBody ? "\n" : ';');
 
                 if ($withBody) {
                     $setter .= "    {\n";
-                    $setter .= '        $this->'.$name." = $$name;"."\n";
+                    $setter .= '        $this->' . $name . " = $$name;" . "\n";
                     $setter .= "    }\n";
                 }
 

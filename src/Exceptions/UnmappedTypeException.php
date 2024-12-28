@@ -6,4 +6,6 @@ namespace GraphQLProjection\Exceptions;
 
 use RuntimeException;
 
-class UnmappedTypeException extends RuntimeException {}
+class UnmappedTypeException extends RuntimeException
+{
+}

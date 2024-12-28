@@ -13,7 +13,7 @@ class GraphQLProjectionServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(
-            __DIR__.'/../config/graphql-projection.php',
+            __DIR__ . '/../config/graphql-projection.php',
             'graphql-projection'
         );
     }
@@ -42,7 +42,7 @@ class GraphQLProjectionServiceProvider extends ServiceProvider
     {
         $this->publishes(
             [
-                __DIR__.'/../config/graphql-projection.php' => config_path('graphql-projection.php'),
+                __DIR__ . '/../config/graphql-projection.php' => config_path('graphql-projection.php'),
             ],
             'config-graphql-projection',
         );

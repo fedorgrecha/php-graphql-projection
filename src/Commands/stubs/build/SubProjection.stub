@@ -1,0 +1,15 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DummyNamespace;
+
+use GraphQLProjection\Client\Projection\BaseSubProjectionNode;
+
+/**
+ * @extends BaseSubProjectionNode<{{ ParentNode }}, {{ RootNode }}>
+ */
+class DummyClass extends BaseSubProjectionNode
+{
+{{ methods }}
+}

@@ -2,13 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLProjection\Commands\GeneratorWrapper;
+namespace GraphQLProjection\Commands\GeneratorWrapper\EntityGenerator;
 
 use Exception;
-use GraphQLProjection\Commands\GeneratorWrapper\Wrappers\GeneratorInputObjectTypeBuilderWrapper;
-use GraphQLProjection\Commands\GeneratorWrapper\Wrappers\GeneratorInputObjectTypeWrapper;
-use GraphQLProjection\Commands\GeneratorWrapper\Wrappers\GeneratorObjectTypeBuilderWrapper;
-use GraphQLProjection\Commands\GeneratorWrapper\Wrappers\GeneratorObjectTypeWrapper;
 use GraphQL\Type\Definition\EnumType;
 use GraphQL\Type\Definition\InputObjectType;
 use GraphQL\Type\Definition\InterfaceType;
@@ -17,17 +13,26 @@ use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\ScalarType;
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\UnionType;
+use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypesContext;
+use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypeWrapper;
+use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypeWrapperContainerInterface;
+use GraphQLProjection\Commands\GeneratorWrapper\Wrappers\GeneratorInputObjectTypeBuilderWrapper;
+use GraphQLProjection\Commands\GeneratorWrapper\Wrappers\GeneratorInputObjectTypeWrapper;
+use GraphQLProjection\Commands\GeneratorWrapper\Wrappers\GeneratorObjectTypeBuilderWrapper;
+use GraphQLProjection\Commands\GeneratorWrapper\Wrappers\GeneratorObjectTypeWrapper;
 use Illuminate\Support\Str;
 
 readonly class GeneratorTypeWrapperContainer implements GeneratorTypeWrapperContainerInterface
 {
-    public function __construct(protected GeneratorTypesContext $typesContext, protected Type&NamedType $type) {}
+    public function __construct(protected GeneratorTypesContext $typesContext, protected Type&NamedType $type)
+    {
+    }
 
     public function shouldGenerate(): bool
     {
         $name = $this->type->name;
 
-        //lighthouse special types
+        //graphql special types (__Schema, __Field, __Type etc)
         if (Str::startsWith($name, '__')) {
             return false;
         }
@@ -84,6 +89,6 @@ readonly class GeneratorTypeWrapperContainer implements GeneratorTypeWrapperCont
             return [];
         }
 
-        throw new Exception('Type not supported: '.class_basename($this->type));
+        throw new Exception('Type not supported: ' . class_basename($this->type));
     }
 }

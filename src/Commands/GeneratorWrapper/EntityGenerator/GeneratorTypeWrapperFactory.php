@@ -2,11 +2,13 @@
 
 declare(strict_types=1);
 
-namespace GraphQLProjection\Commands\GeneratorWrapper;
+namespace GraphQLProjection\Commands\GeneratorWrapper\EntityGenerator;
 
-use GraphQLProjection\Entities\QueryContainer;
 use GraphQL\Type\Definition\NamedType;
 use GraphQL\Type\Definition\Type;
+use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypesContext;
+use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypeWrapperContainerInterface;
+use GraphQLProjection\Entities\QueryContainer;
 
 class GeneratorTypeWrapperFactory
 {
@@ -14,7 +16,7 @@ class GeneratorTypeWrapperFactory
 
     public function getBuildRootDir(): string
     {
-        return trim(config('graphql-projection.build.buildDir'), '/').'/';
+        return trim(config('graphql-projection.build.buildDir'), '/') . '/';
     }
 
     public function getBuildTypeDir(): string
@@ -39,7 +41,7 @@ class GeneratorTypeWrapperFactory
 
     public function generatedRootPath(?string $path = null): string
     {
-        return base_path($this->getBuildRootDir().$path);
+        return base_path($this->getBuildRootDir() . $path);
     }
 
     /**
@@ -69,10 +71,7 @@ class GeneratorTypeWrapperFactory
         GeneratorTypesContext $typesContext,
         Type&NamedType $type
     ): GeneratorTypeWrapperContainerInterface {
-        return new GeneratorTypeWrapperContainer(
-            $typesContext,
-            $type
-        );
+        return new GeneratorTypeWrapperContainer($typesContext, $type);
     }
 
     public function getQueryWrapperContainer(

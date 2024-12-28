@@ -12,12 +12,12 @@ class GeneratorInputObjectTypeBuilderWrapper extends GeneratorInputObjectTypeWra
 
     public function getClassQualifiedName(): string
     {
-        return parent::getClassQualifiedName().'Builder';
+        return parent::getClassQualifiedName() . 'Builder';
     }
 
     public function getStubPath(): string
     {
-        return __DIR__.'/../../stubs/build/TypeBuilder.stub';
+        return __DIR__ . '/../../stubs/build/TypeBuilder.stub';
     }
 
     public function getStub(): string

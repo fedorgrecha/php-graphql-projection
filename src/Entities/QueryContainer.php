@@ -18,7 +18,8 @@ readonly class QueryContainer
     public function __construct(
         public bool $isMutation,
         public FieldDefinition $query,
-    ) {}
+    ) {
+    }
 
     public function __call(string $name, array $arguments)
     {

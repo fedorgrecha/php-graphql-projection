@@ -3,14 +3,16 @@
 namespace GraphQLProjection\Commands;
 
 use Exception;
-use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypesContext;
-use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypeWrapperContainerInterface;
-use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypeWrapperFactory;
-use GraphQLProjection\Entities\QueryContainer;
 use Generator;
 use GraphQL\Type\Definition\NamedType;
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Schema;
+use GraphQLProjection\Commands\GeneratorWrapper\EntityGenerator\GeneratorTypeWrapperFactory;
+use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypesContext;
+use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypeWrapper;
+use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypeWrapperContainerInterface;
+use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypeWrapperHasSubWrappers;
+use GraphQLProjection\Entities\QueryContainer;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
@@ -19,9 +21,7 @@ use RuntimeException;
 class GenerateGraphQLProjectionCommand extends GeneratorCommand
 {
     protected $signature = 'graphql:projection';
-
     protected $description = 'Generate GraphQL projection';
-
     private readonly GraphQLSchemaProvider $schemaProvider;
 
     public function __construct(
@@ -50,7 +50,7 @@ class GenerateGraphQLProjectionCommand extends GeneratorCommand
         $finish = microtime(true);
 
         $seconds = $finish - $start;
-        $this->info('Finished in '.round($seconds, 2).' seconds');
+        $this->info('Finished in ' . round($seconds, 2) . ' seconds');
 
         return true;
     }
@@ -109,16 +109,27 @@ class GenerateGraphQLProjectionCommand extends GeneratorCommand
         }
 
         foreach ($container->getWrappers() as $wrapper) {
-            $class = $this->qualifyClass($wrapper->getClassQualifiedName());
-            $path = $this->getPath($class);
-            $stub = $wrapper->getStub();
+            $this->buildWrapper($wrapper);
 
-            $this->files->put(
-                $path,
-                $this->replaceNamespace($stub, $class)
-                    ->replaceClass($stub, $class)
-            );
+            if ($wrapper instanceof GeneratorTypeWrapperHasSubWrappers) {
+                foreach ($wrapper->getSubWrappers() as $subWrapper) {
+                    $this->buildWrapper($subWrapper);
+                }
+            }
         }
+    }
+
+    private function buildWrapper(GeneratorTypeWrapper $wrapper): void
+    {
+        $class = $this->qualifyClass($wrapper->getClassQualifiedName());
+        $path = $this->getPath($class);
+        $stub = $wrapper->getStub();
+
+        $this->files->put(
+            $path,
+            $this->replaceNamespace($stub, $class)
+                ->replaceClass($stub, $class)
+        );
     }
 
     /** @return null|Generator<QueryContainer> */
@@ -139,7 +150,7 @@ class GenerateGraphQLProjectionCommand extends GeneratorCommand
     {
         $name = Str::replaceFirst($this->rootNamespace(), '', $name);
 
-        return base_path($this->generatorFactory->getBuildRootDir()).str_replace('\\', '/', $name).'.php';
+        return base_path($this->generatorFactory->getBuildRootDir()) . str_replace('\\', '/', $name) . '.php';
     }
 
     protected function rootNamespace(): string

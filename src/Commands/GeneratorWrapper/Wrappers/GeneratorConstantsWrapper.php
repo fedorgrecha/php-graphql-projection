@@ -4,26 +4,28 @@ declare(strict_types=1);
 
 namespace GraphQLProjection\Commands\GeneratorWrapper\Wrappers;
 
-use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypesContext;
-use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypeWrapper;
 use GraphQL\Type\Definition\FieldDefinition;
 use GraphQL\Type\Definition\ObjectType;
+use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypesContext;
+use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypeWrapper;
 use Illuminate\Support\Arr;
 
 readonly class GeneratorConstantsWrapper implements GeneratorTypeWrapper
 {
-    public function __construct(GeneratorTypesContext $typesContext, private ObjectType $type) {}
+    public function __construct(GeneratorTypesContext $typesContext, private ObjectType $type)
+    {
+    }
 
     public function getClassQualifiedName(): string
     {
         $c = 'Constants';
 
-        return $c.'/'.$this->type->name().$c;
+        return $c . '/' . $this->type->name() . $c;
     }
 
     public function getStubPath(): string
     {
-        return __DIR__.'/../../stubs/build/Constants.stub';
+        return __DIR__ . '/../../stubs/build/Constants.stub';
     }
 
     public function getStub(): string

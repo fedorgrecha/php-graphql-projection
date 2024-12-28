@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLProjection\Commands\GeneratorWrapper\Wrappers;
 
+use GraphQL\Type\Definition\FieldDefinition;
+use GraphQL\Type\Definition\InterfaceType;
 use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypesContext;
 use GraphQLProjection\Commands\GeneratorWrapper\GeneratorTypeWrapper;
 use GraphQLProjection\Commands\GeneratorWrapper\TypeResolvers\FieldDefinitionTypeResolver;
 use GraphQLProjection\Commands\GeneratorWrapper\Wrappers\Traits\GeneratorMethodTrait;
-use GraphQL\Type\Definition\FieldDefinition;
-use GraphQL\Type\Definition\InterfaceType;
 
 class GeneratorInterfaceTypeWrapper implements GeneratorTypeWrapper
 {
@@ -18,16 +18,17 @@ class GeneratorInterfaceTypeWrapper implements GeneratorTypeWrapper
     public function __construct(
         private readonly GeneratorTypesContext $typesContext,
         private readonly InterfaceType $type
-    ) {}
+    ) {
+    }
 
     public function getClassQualifiedName(): string
     {
-        return 'Types/'.$this->type->name();
+        return 'Types/' . $this->type->name();
     }
 
     public function getStubPath(): string
     {
-        return __DIR__.'/../../stubs/build/Interface.stub';
+        return __DIR__ . '/../../stubs/build/Interface.stub';
     }
 
     public function getStub(): string
@@ -57,7 +58,7 @@ class GeneratorInterfaceTypeWrapper implements GeneratorTypeWrapper
 
         return str_replace(
             'DummyClass',
-            'DummyClass extends '.implode(
+            'DummyClass extends ' . implode(
                 ', ',
                 array_map(fn (InterfaceType $interface) => $interface->name(), $interfaces)
             ),

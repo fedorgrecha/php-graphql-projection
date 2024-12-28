@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GraphQLProjection;
 
-use GraphQLProjection\Commands\GraphQLSchemaProvider;
 use GraphQL\Type\Schema;
+use GraphQLProjection\Commands\GraphQLSchemaProvider;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 
 readonly class RebingSchemaProvider implements GraphQLSchemaProvider
@@ -15,7 +15,9 @@ readonly class RebingSchemaProvider implements GraphQLSchemaProvider
         GraphQL::clearSchemas();
     }
 
-    public function afterGeneration(): void {}
+    public function afterGeneration(): void
+    {
+    }
 
     public function getSchema(): Schema
     {
